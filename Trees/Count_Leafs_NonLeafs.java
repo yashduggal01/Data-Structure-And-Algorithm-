@@ -1,13 +1,16 @@
 package Trees;
 import java.util.*;
-class TreeNode {
-    int val;
-    TreeNode left, right;
-    TreeNode(int item) {
-        val = item;
-        left = right = null;
+    class TreeNode {
+        int data;
+        TreeNode left; 
+        TreeNode right;
+        public TreeNode() {
+        data = 0;
+        }
+        public TreeNode(int d)  {
+        data = d;
+        }
     }
-}
 public class Count_Leafs_NonLeafs {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -16,7 +19,7 @@ public class Count_Leafs_NonLeafs {
         for(int i =0 ;i<n;i++){
             arr[i]=sc.nextInt();
         }
-        TreeNode root = buildTree(arr, 0);
+            TreeNode root = buildTree(arr, 0); // Using shared TreeNode class
     int leafs = countleaf(root);
     int nonLeafs = countnonleaf(root);
     int[] counts = {leafs, nonLeafs};

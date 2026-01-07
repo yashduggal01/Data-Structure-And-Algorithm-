@@ -1,6 +1,14 @@
 package Trees;
 import java.util.*;
-public class Print_Binary_Tree {
+class TreeNode {
+    int val;
+    TreeNode left, right;
+    TreeNode(int item) {
+        val = item;
+        left = right = null;
+    }
+}
+public class Print_All_the_Path_to_Leaf {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
@@ -9,7 +17,8 @@ public class Print_Binary_Tree {
             arr[i]=sc.nextInt();
         }
         TreeNode root = buildTree(arr, 0);
-        printTree(root);
+        printAllPaths(root);
+
         sc.close();
     }
     static TreeNode buildTree(int[] arr, int index) {
@@ -34,30 +43,32 @@ public class Print_Binary_Tree {
         }
         return node[0];
 }
-static void printTree(TreeNode root){
-    if(root==null){
-        return;
+
+  static void printAllPaths(TreeNode root) {
+    // Write your code here
+      if(root==null){
+        return ;
+      }
+      int[] count = new int[1];
+      List<Integer> list = new ArrayList<>();
+
+      solve(root,list,count);
+      System.out.print(count[0]);
+  }
+static void solve(TreeNode root, List<Integer> list , int[] count){
+     list.add(root.val);
+    if(root.left==null&&root.right==null){
+        for(int n : list) System.out.print(n+" ");
+        System.out.println(list.size()-1);
+        count[0]++;
     }
-    Queue<TreeNode> queue = new LinkedList<>();
-    queue.add(root);
-    while(!queue.isEmpty()){
-        int levelSize = queue.size();
-        for(int i=0;i<levelSize;i++){
-            TreeNode currentNode = queue.poll();
-            if(i==0){
-                System.out.print(currentNode.val);
-                }
-                else{
-            System.out.print(" " + currentNode.val );
-                }
-            if(currentNode.left!=null){
-                queue.add(currentNode.left);
-            }
-            if(currentNode.right!=null){
-                queue.add(currentNode.right);
-            }
-        }
-        System.out.println();
+   
+    if(root.left!=null){
+        solve(root.left,list,count);
     }
+    if(root.right!=null){
+        solve(root.right,list,count);
+    }
+    list.remove(list.size()-1);
 }
 }

@@ -8,6 +8,7 @@ class TreeNode {
         left = right = null;
     }
 }
+// The TreeNode class is now shared and should be used directly
 public class Inorder_Preorder_Postorder {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -16,7 +17,7 @@ public class Inorder_Preorder_Postorder {
         for(int i =0 ;i<n;i++){
             arr[i]=sc.nextInt();
         }
-        TreeNode root = buildTree(arr, 0);
+            TreeNode root = buildTree(arr, 0); // Using shared TreeNode
         System.out.print("Inorder: ");
         printInOrder(root);
         System.out.println();

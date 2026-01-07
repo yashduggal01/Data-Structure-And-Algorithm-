@@ -1,6 +1,6 @@
-package Trees;
+ package Trees;
 import java.util.*;
-public class Print_Binary_Tree {
+public class Find_the_right_node_of_the_given_node {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
@@ -8,8 +8,14 @@ public class Print_Binary_Tree {
         for(int i =0 ;i<n;i++){
             arr[i]=sc.nextInt();
         }
+        int target = sc.nextInt();
         TreeNode root = buildTree(arr, 0);
-        printTree(root);
+        TreeNode result = findRightNode(root, target);
+        if(result != null) {
+            System.out.println("Right node of " + target + " is: " + result.val);
+        } else {
+            System.out.println("No right node found for " + target);
+        }
         sc.close();
     }
     static TreeNode buildTree(int[] arr, int index) {
@@ -34,30 +40,21 @@ public class Print_Binary_Tree {
         }
         return node[0];
 }
-static void printTree(TreeNode root){
-    if(root==null){
-        return;
+static TreeNode findRightNode(TreeNode root, int target) {
+    if(root == null) {
+        return null;
     }
     Queue<TreeNode> queue = new LinkedList<>();
     queue.add(root);
-    while(!queue.isEmpty()){
+    while(!queue.isEmpty()) {
         int levelSize = queue.size();
-        for(int i=0;i<levelSize;i++){
+        for(int i = 0; i < levelSize; i++) {
             TreeNode currentNode = queue.poll();
-            if(i==0){
-                System.out.print(currentNode.val);
-                }
-                else{
-            System.out.print(" " + currentNode.val );
-                }
-            if(currentNode.left!=null){
-                queue.add(currentNode.left);
-            }
-            if(currentNode.right!=null){
+            if(currentNode.right != null) {
                 queue.add(currentNode.right);
             }
         }
-        System.out.println();
     }
+    return null;
 }
 }
